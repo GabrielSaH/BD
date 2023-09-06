@@ -1,0 +1,48 @@
+---------ATENÇAO--------- 
+Essa atividade foi feita com base no banco de dados atualizado:
+https://catalog.data.gov/dataset/current-employee-names-salaries-and-position-titles
+e não o link do gitlab, por isso os resultados podem ser um pouco diferentes. 
+--------------------------------------------------------------------------------------------------------------------------------
+
+Passo a passo para achar o x: 
+
+1: Comando para achar a media dos dois salarios: 
+select avg("Annual Salary") from Chicago where "Salary or Hourly" == "SALARY"
+union
+select avg("Hourly Rate" * ("Typical Hours" / 5) * 251) from Chicago where "Salary or Hourly" = "HOURLY";
+
+Out -> 100476.457769767 <br /> 76288.6252593594
+Conclusão: Salario anual tem uma media maior.
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+2: Quanto é necessario incrementar para os dois se igualarem. 
+
+eu fiz o calculo de incremento porcentual, a formula segue:
+X = Valor inicial 
+Y = Valor Final 
+
+((Y - X) / X) * 100
+substituindo e calculando temos como resultado 31,7% que eu arredondei para 32%
+
+Logo, o valor inicial deve ser incrementado em 32% para que ele chegue no valor final.
+então, x = 32 (x da atividade nao da formula)
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+3: Dar o update para igualar os salarios
+
+update Chicago set "Hourly Rate" = "Hourly Rate" * 1.32;
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+4: Checagem de resultado
+
+select avg("Annual Salary") from Chicago where "Salary or Hourly" == "SALARY"
+union
+select avg("Hourly Rate" * ("Typical Hours" / 5) * 251) from Chicago where "Salary or Hourly" = "HOURLY";
+
+Out -> 100476.457769767
+100700.985342356
+
+--------------------------------------------------------------------------------------------------------------------------------
