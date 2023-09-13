@@ -1,0 +1,20 @@
+A1.
+  a) select * from film where film_id in (select film_id from film_category where category_id = 1);
+     out -> a tabela completa dos filmes cuja categoria é açao (1).
+  
+  b) select f.email from staff as f where f.first_name in (select d.first_name from actor as d where d.first_name = f.first_name);
+     out -> o email dos participantes da staff cujo primeiro nome tambem é o primeiro nome de um ator
+  
+  c) SELECT title FROM film WHERE EXISTS (SELECT film_id FROM film_category WHERE film.film_id = film_category.film_id AND film_category.category_id = 1 AND film.length > 119);
+     out -> o titulo dos filmes de açao cuja duraçao for maior ou igual a 2 horas.
+
+  d) select distinct first_name from actor;
+     out -> Todos os nomes nao repetidos dos atores. (tem 72 nomes repetidos)
+
+  e) select customer.first_name, staff.first_name from staff inner join customer on customer.last_name = staff.last_name;
+     out -> o primeiro nome dos funcionarios e clientes que sao parentes entre si (mesmo sobrenome)
+
+  f) select staff.first_name, actor.first_name from staff left join actor on staff.first_name = actor.first_name;
+     out -> todos os primeiros nome da staff mais os nomes em comum dos actor
+
+  
