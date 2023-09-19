@@ -17,4 +17,17 @@ A1.
   f) select staff.first_name, actor.first_name from staff left join actor on staff.first_name = actor.first_name;
      out -> todos os primeiros nome da staff mais os nomes em comum dos actor
 
-  
+  g) select AVG(length) from film;
+     out -> a media de duração dos filmes
+
+  h) select AVG(length), rating from film group by rating;
+     out -> A media de de duração dos filmes separando-os por rating.
+
+A2.
+ create view Film_and_category
+ as select film.title, category.name, film.length
+ from film, film_category, category 
+ where film.film_id = film_category.film_id AND category.category_id = film_category.category_id;
+
+out -> uma view que mostra todos os filmes junto com o nome de sua categoria e a sua duração.
+
