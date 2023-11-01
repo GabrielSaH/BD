@@ -1,0 +1,29 @@
+USE av3_c;
+
+select * from pessoa;
+
+CREATE TABLE av3_c.NewTable (
+	cpf varchar(15),
+	nome varchar(50),
+	email varchar(100),
+	telefone varchar(10),
+	v INT,
+	CONSTRAINT PK_av3 PRIMARY KEY (cpf, v)
+	);
+
+ALTER TABLE Pessoa ALTER COLUMN v SET DEFAULT 1;
+
+CREATE TRIGGER insert_in_table
+BEFORE INSERT ON Pessoa FOR EACH ROW
+BEGIN
+	IF EXISTS (SELECT * FROM Pessoa WHERE cpf = NEW.cpf) THEN 
+		SET NEW.cpf = '1';
+	END if;
+
+END;
+
+INSERT INTO Pessoa (cpf, nome, email, telefone) VALUES ('100.390.403-30', 'joao', 'joao@gmail.com', '123123123');
+
+
+
+
